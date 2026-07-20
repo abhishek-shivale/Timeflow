@@ -4,6 +4,9 @@ use std::time::Duration;
 const MAIN_CSS: Asset = asset!("/assets/main.css");
 const FAVICON: Asset = asset!("/assets/favicon.ico");
 const APPLE_TOUCH_ICON: Asset = asset!("/assets/apple-touch-icon.png");
+const APP_ICON: Asset = asset!("/assets/timeflow-icon.png");
+#[used]
+static IOS_ICONS: Asset = asset!("/ios/icons", AssetOptions::folder());
 
 fn main() {
     dioxus::launch(App);
@@ -43,7 +46,11 @@ fn App() -> Element {
         main { class: "app-shell",
             header { class: "top-bar",
                 div { class: "brand",
-                    span { class: "brand-mark" }
+                    img {
+                        class: "brand-mark",
+                        src: APP_ICON,
+                        alt: "Timeflow icon",
+                    }
                     span { "Timeflow" }
                 }
 
