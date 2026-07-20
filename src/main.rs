@@ -16,6 +16,7 @@ fn main() {
 fn App() -> Element {
     let mut seconds = use_signal(|| 0_u64);
     let mut running = use_signal(|| false);
+    let mut focus_mode = use_signal(|| false);
 
     use_future(move || async move {
         loop {
@@ -43,7 +44,8 @@ fn App() -> Element {
         }
         document::Meta { name: "theme-color", content: "#000000" }
 
-        main { class: "app-shell",
+        main {
+            class: if focus_mode() { "app-shell app-shell--focus" } else { "app-shell" },
             header { class: "top-bar",
                 div { class: "brand",
                     img {
@@ -54,11 +56,57 @@ fn App() -> Element {
                     span { "Timeflow" }
                 }
 
-                div { class: "status",
-                    span {
-                        class: if running() { "status-dot status-dot--active" } else { "status-dot" },
+                div { class: "top-actions",
+                    div { class: "status",
+                        span {
+                            class: if running() { "status-dot status-dot--active" } else { "status-dot" },
+                        }
+                        if running() { "Running" } else { "Ready" }
                     }
-                    if running() { "Running" } else { "Ready" }
+
+                    button {
+                        class: "icon-button",
+                        aria_label: if focus_mode() { "Exit fullscreen" } else { "Enter fullscreen" },
+                        title: if focus_mode() { "Exit fullscreen" } else { "Enter fullscreen" },
+                        onclick: move |_| {
+                            let entering_fullscreen = !focus_mode();
+                            focus_mode.set(entering_fullscreen);
+
+                            let script = if entering_fullscreen {
+                                r#"
+                                const root = document.documentElement;
+                                const request = root.requestFullscreen || root.webkitRequestFullscreen;
+                                if (request) request.call(root).catch?.(() => {});
+                                "#
+                            } else {
+                                r#"
+                                const exit = document.exitFullscreen || document.webkitExitFullscreen;
+                                if (exit) exit.call(document).catch?.(() => {});
+                                "#
+                            };
+
+                            let _ = document::eval(script);
+                        },
+                        svg {
+                            view_box: "0 0 24 24",
+                            fill: "none",
+                            stroke: "currentColor",
+                            stroke_width: "1.8",
+                            stroke_linecap: "round",
+                            stroke_linejoin: "round",
+                            if focus_mode() {
+                                path { d: "M8 3v3a2 2 0 0 1-2 2H3" }
+                                path { d: "M16 3v3a2 2 0 0 0 2 2h3" }
+                                path { d: "M8 21v-3a2 2 0 0 0-2-2H3" }
+                                path { d: "M16 21v-3a2 2 0 0 1 2-2h3" }
+                            } else {
+                                path { d: "M8 3H5a2 2 0 0 0-2 2v3" }
+                                path { d: "M16 3h3a2 2 0 0 1 2 2v3" }
+                                path { d: "M8 21H5a2 2 0 0 1-2-2v-3" }
+                                path { d: "M16 21h3a2 2 0 0 0 2-2v-3" }
+                            }
+                        }
+                    }
                 }
             }
 

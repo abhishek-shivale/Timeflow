@@ -37,6 +37,25 @@ button {
     background: #000;
 }
 
+.app-shell--focus .brand,
+.app-shell--focus .status,
+.app-shell--focus .mode-label,
+.app-shell--focus .time-caption,
+.app-shell--focus .footer-note {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.app-shell--focus .timer-stage {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.app-shell--focus .time-display {
+    font-size: clamp(3.5rem, 17vw, 14rem);
+}
+
 .top-bar {
     display: flex;
     align-items: center;
@@ -49,10 +68,15 @@ button {
 }
 
 .brand,
-.status {
+.status,
+.top-actions {
     display: flex;
     align-items: center;
     gap: 8px;
+}
+
+.top-actions {
+    gap: 10px;
 }
 
 .brand-mark {
@@ -61,6 +85,16 @@ button {
     height: 28px;
     border-radius: 7px;
     object-fit: cover;
+}
+
+.brand,
+.status,
+.mode-label,
+.time-caption,
+.footer-note,
+.timer-stage,
+.time-display {
+    transition: opacity 180ms ease, visibility 180ms ease, font-size 220ms ease, padding 220ms ease;
 }
 
 .status {
@@ -72,6 +106,42 @@ button {
     font-size: 0.7rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
+}
+
+.icon-button {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.72);
+    cursor: pointer;
+    transition: color 160ms ease, background 160ms ease, border-color 160ms ease, transform 160ms ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.icon-button svg {
+    width: 19px;
+    height: 19px;
+}
+
+.icon-button:hover {
+    border-color: rgba(255, 255, 255, 0.28);
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.icon-button:active {
+    transform: scale(0.95);
+}
+
+.icon-button:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
 }
 
 .status-dot {
