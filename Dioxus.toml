@@ -1,9 +1,18 @@
 [application]
+name = "Timeflow"
+
+[bundle]
+identifier = "com.abhishekshivale.timeflow"
+publisher = "Abhishek Shivale"
+icon = ["assets/timeflow-icon.png"]
+category = "Productivity"
+short_description = "A calm, minimalist stopwatch."
+long_description = "Timeflow is a focused cross-platform stopwatch with a clean HH:MM:SS display and simple start, pause, and reset controls."
 
 [web.app]
 
 # HTML title tag content
-title = "stopwatch"
+title = "Timeflow"
 
 # include `assets` in web platform
 [web.resource]

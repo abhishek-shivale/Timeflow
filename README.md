@@ -1,25 +1,72 @@
-# Development
+# Timeflow
 
-Your new bare-bones project includes minimal organization with a single `main.rs` file and a few assets.
+<p align="center">
+  <img src="assets/timeflow-icon.png" alt="Timeflow app icon" width="128" height="128">
+</p>
 
+<p align="center">
+  A calm, minimalist stopwatch built with Rust and Dioxus 0.7.
+</p>
+
+Timeflow provides a distraction-free `HH:MM:SS` timer with simple controls and a responsive interface designed for web, desktop, and mobile.
+
+## Features
+
+- Start, pause, and reset controls
+- Hours, minutes, and seconds display
+- Responsive layout for phones and larger screens
+- Accessible elapsed-time labels and keyboard focus states
+- Shared Rust codebase across supported Dioxus platforms
+- Custom browser and application icons
+
+## Built with
+
+- [Rust](https://www.rust-lang.org/)
+- [Dioxus 0.7](https://dioxuslabs.com/learn/0.7/)
+- Tokio's asynchronous timer
+
+## Getting started
+
+Install Rust and the Dioxus CLI, then clone the repository and enter its directory.
+
+```sh
+cargo install dioxus-cli
 ```
-project/
-├─ assets/ # Any assets that are used by the app should be placed here
-├─ src/
-│  ├─ main.rs # main.rs is the entry point to your application and currently contains all components for the app
-├─ Cargo.toml # The Cargo.toml file defines the dependencies and feature flags for your project
+
+Run the web version:
+
+```sh
+dx serve --web
 ```
 
-### Serving Your App
+Run the desktop version:
 
-Run the following command in the root of your project to start developing with the default platform:
-
-```bash
-dx serve
+```sh
+dx serve --desktop
 ```
 
-To run for a different platform, use the `--platform platform` flag. E.g.
-```bash
-dx serve --platform desktop
+Run on an available iOS Simulator:
+
+```sh
+dx serve --ios
 ```
 
+iOS development requires full Xcode, an installed iOS Simulator runtime, and a booted simulator.
+
+## Useful checks
+
+```sh
+cargo fmt --check
+cargo check
+cargo clippy
+```
+
+## Project structure
+
+```text
+.
+├── assets/          # Styles and application icons
+├── src/main.rs      # Stopwatch state, timer task, and interface
+├── Cargo.toml       # Rust dependencies and platform features
+└── Dioxus.toml      # Dioxus application and bundle metadata
+```

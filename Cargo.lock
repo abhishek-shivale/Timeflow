@@ -4829,14 +4829,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6ce2be8dc25455e1f91df71bfa12ad37d7af1092ae736f3a6cd0e37bc7810596"
 
 [[package]]
-name = "stopwatch"
-version = "0.1.0"
-dependencies = [
- "dioxus",
- "tokio",
-]
-
-[[package]]
 name = "string_cache"
 version = "0.8.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -5132,6 +5124,14 @@ checksum = "7e689342a48d2ea927c87ea50cabf8594854bf940e9310208848d680d668ed85"
 dependencies = [
  "num-conv",
  "time-core",
+]
+
+[[package]]
+name = "timeflow"
+version = "0.1.0"
+dependencies = [
+ "dioxus",
+ "tokio",
 ]
 
 [[package]]

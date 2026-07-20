@@ -2,6 +2,8 @@ use dioxus::prelude::*;
 use std::time::Duration;
 
 const MAIN_CSS: Asset = asset!("/assets/main.css");
+const FAVICON: Asset = asset!("/assets/favicon.ico");
+const APPLE_TOUCH_ICON: Asset = asset!("/assets/apple-touch-icon.png");
 
 fn main() {
     dioxus::launch(App);
@@ -28,14 +30,21 @@ fn App() -> Element {
     let remaining_seconds = total_seconds % 60;
 
     rsx! {
-        document::Title { "Stopwatch" }
+        document::Title { "Timeflow" }
         document::Stylesheet { href: MAIN_CSS }
+        document::Link { rel: "icon", href: FAVICON }
+        document::Link { rel: "apple-touch-icon", href: APPLE_TOUCH_ICON }
+        document::Meta {
+            name: "description",
+            content: "A calm, minimalist stopwatch built with Rust and Dioxus."
+        }
+        document::Meta { name: "theme-color", content: "#000000" }
 
         main { class: "app-shell",
             header { class: "top-bar",
                 div { class: "brand",
                     span { class: "brand-mark" }
-                    span { "Moment" }
+                    span { "Timeflow" }
                 }
 
                 div { class: "status",
@@ -49,7 +58,7 @@ fn App() -> Element {
             section { class: "timer-stage",
                 p { class: "mode-label", "Stopwatch" }
 
-                h1 { class: "sr-only", "Stopwatch" }
+                h1 { class: "sr-only", "Timeflow Stopwatch" }
 
                 div {
                     class: "time-display",
