@@ -41,6 +41,7 @@ button {
 .app-shell--focus .status,
 .app-shell--focus .mode-label,
 .app-shell--focus .time-caption,
+.app-shell--focus .controls,
 .app-shell--focus .footer-note {
     opacity: 0;
     visibility: hidden;
@@ -91,6 +92,7 @@ button {
 .status,
 .mode-label,
 .time-caption,
+.controls,
 .footer-note,
 .timer-stage,
 .time-display {
